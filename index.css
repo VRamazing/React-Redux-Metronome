@@ -1,0 +1,38 @@
+* {font-family: Nunito, 'sans-serif'; }
+
+.mainDiv{ margin: auto; 
+		  width: 80%; 
+		  text-align: center; 
+		  margin-top: 30px;
+		}
+
+.mainHeader{
+	font-size: 40px;
+	color: green;
+	font-face: bold;
+	font-style: italic;
+	margin-bottom: 20px;
+
+}
+
+.manip {
+	border-radius: 30px;
+	margin: 0 10px;
+	background-color: #d1d1d1;
+	width: 35px;
+	height: 35px;
+
+}
+
+.beatSlider{
+	width: 70%;
+}
+
+.button.play,.button.pause{
+	margin-top: 6px;
+	margin-left: 10px;
+}
+
+.button.info{
+	background-color: #d1d1d1;
+}
