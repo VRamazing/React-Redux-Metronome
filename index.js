@@ -53,7 +53,8 @@ class App extends React.Component{
   	this.playBeat = this.playBeat.bind(this);
   	this.pauseBeat = this.pauseBeat.bind(this);
   	this.sliderInputChange = this.sliderInputChange.bind(this);
-
+  	this.incBeat = this.incBeat.bind(this);
+  	this.decBeat = this.decBeat.bind(this);
   }
 
  playBeat(){
@@ -75,7 +76,19 @@ class App extends React.Component{
  sliderInputChange(event){
 	console.log(event.target.value);
 	this.props.changeBeatCount(event.target.value);
+	this.playBeat();
  }
+
+ incBeat(){
+ 	this.props.incBeatCount();
+	this.playBeat();
+ }
+
+ decBeat(){
+ 	this.props.decBeatCount();
+	this.playBeat();
+ }
+
 
  render(){
     return(<div className = "mainDiv">
@@ -89,12 +102,12 @@ class App extends React.Component{
 
     			<br />
 
-				<button className="button manip" onClick = {this.props.decBeatCount}>-</button>
+				<button className="button manip" onClick = {this.decBeat}>-</button>
 
     			<Slider min={40} max={218} val={store.getState().beats} step = {1} 
     			onChange={this.sliderInputChange}/>
   
-				<button className="button manip" onClick = {this.props.incBeatCount}  >+</button>
+				<button className="button manip" onClick = {this.incBeat}  >+</button>
 
 				<audio id="audioLoop" >
 				  <source src="./kick.wav" type="audio/wav" id = "drumLoop"/>
