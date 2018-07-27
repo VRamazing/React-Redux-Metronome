@@ -15,6 +15,8 @@ const DEC = 'DEC';
 const CHANGE = 'CHANGE';
 
 
+
+
 function reducer(state, action) {
 	switch(action.type) {
 		case INC:
@@ -48,6 +50,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class App extends React.Component{
   metroInterval;
+  playing : false;
   constructor(props){
   	super(props);  	
   	this.playBeat = this.playBeat.bind(this);
@@ -61,32 +64,38 @@ class App extends React.Component{
  	if(this.metroInterval  !=null){
  		clearInterval(this.metroInterval);
  	}
- 	console.log(store.getState().beats);
+ 	this.playing = true;
  	this.metroInterval = setInterval(function(){
  		document.getElementById("audioLoop").play();
- 	}, 1000 * 60/this.props.state.beats);
+ 	}, 1000 * 60/store.getState().beats);
  }
 
  pauseBeat(){
  	if(this.metroInterval!=null){
+ 		this.playing = false;
  		clearInterval(this.metroInterval);
  	}
  }
 
  sliderInputChange(event){
-	console.log(event.target.value);
 	this.props.changeBeatCount(event.target.value);
-	this.playBeat();
+	if(this.metroInterval != undefined && this.playing){
+		this.playBeat();
+ 	}
  }
 
  incBeat(){
  	this.props.incBeatCount();
-	this.playBeat();
+ 	if(this.metroInterval != undefined && this.playing){
+		this.playBeat();
+ 	}
  }
 
  decBeat(){
  	this.props.decBeatCount();
-	this.playBeat();
+	if(this.metroInterval != undefined && this.playing){
+		this.playBeat();
+ 	}
  }
 
 
@@ -94,6 +103,7 @@ class App extends React.Component{
     return(<div className = "mainDiv">
 
     			<Header val = "Metronome" />
+
 				<div>
 					<span style = {{fontSize: "30px"}}> {this.props.state.beats} </span> BPM 
 					<button className="button play" onClick = {this.playBeat}>Play</button>  
@@ -104,7 +114,7 @@ class App extends React.Component{
 
 				<button className="button manip" onClick = {this.decBeat}>-</button>
 
-    			<Slider min={40} max={218} val={store.getState().beats} step = {1} 
+    			<Slider min={10} max={250} val={store.getState().beats} step = {1} 
     			onChange={this.sliderInputChange}/>
   
 				<button className="button manip" onClick = {this.incBeat}  >+</button>
