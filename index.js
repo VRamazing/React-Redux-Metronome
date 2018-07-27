@@ -120,7 +120,7 @@ class App extends React.Component{
 				<button className="button manip" onClick = {this.incBeat}  >+</button>
 
 				<audio id="audioLoop" >
-				  <source src="./kick.wav" type="audio/wav" id = "drumLoop"/>
+				  <source src="./metronome.wav" type="audio/wav" id = "drumLoop"/>
 				  Your browser does not support the audio element.
 				</audio>
 				
